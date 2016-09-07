@@ -22,18 +22,24 @@ class GameController extends Controller
     */
     public function ajaxAction(Request $request)
     {
+        //Take Only valid XMLHTTPRequest!
+
         if ($request->isXMLHttpRequest()) {
 
+            //Create New Players
             $Player1 = new player(0, "Player 1", "Player");
             $Player2 = new player(1, "Player 2", "Computer");
 
+            //Start the game!
             $Game = new game($Player1, $Player2);
             $Game->playHand();
             $Game->scoreHand();
+
+            //Get the outcome for the front-end and for the database stats
             $output=$Game->outcome();
             $log=$Game->log();
 
-
+            //Save the stats
             $GameStats=new GameStats();
 
             for($i=0; $i<count($log); $i++) {
@@ -47,12 +53,14 @@ class GameController extends Controller
 
             }
 
+            //Get the stats for the front-end
             $em = $this->getDoctrine()->getManager();
             $stats=$em->getRepository('AppBundle:GameStats')
                 ->getStats();
 
             $output[]=$stats;
 
+            //Send back to jQuery as JSON
             return new JsonResponse(json_encode($output));
         }else{
             return new Response('Invalid Request!', 400);
@@ -62,8 +70,11 @@ class GameController extends Controller
     }
 
     /**
-     * @Route("/new")
+     *
      */
+
+    //@Route("/new") - Left this here for demo purposes - disabled route for live version
+
     public function newAction()
     {
 
@@ -139,10 +150,10 @@ class GameController extends Controller
         $em->persist($game);
         $em->flush();
 
-        return new Response("Data action done!");
+        //return new Response("Data action done!");
 
 
-        //return new Response("This feature is currently disabled.");
+        return new Response("This feature is currently disabled.");
     }
 
     /**
@@ -153,24 +164,24 @@ class GameController extends Controller
         /* ===== Load Game Landing Page Data ===== */
 
         $em = $this->getDoctrine()->getManager();
-        
+
+        //Load Game Info
         $gameInfo = $em->getRepository('AppBundle:GameInfo')
         ->find(1);
-         //dump($gameInfoData);die;
 
+        //Load Gestures
         $gestures = $em->getRepository('AppBundle:gestures')
             ->findBy(
                 array(),
                 array('list_order'=>'ASC')
             );
-        //dump($gestures);die;
 
-        //$stats="";
+        //Load Stats for first load. During gameplay they will be reloaded via AJAX
         $stats = $em->getRepository('AppBundle:GameStats')
         ->getStats();
-        //dump($stats);die;
-        
 
+
+        //Send to front end
         return $this->render('default/game.html.twig',
             array(
                 'gameInfo' =>$gameInfo,

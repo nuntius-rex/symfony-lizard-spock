@@ -21,8 +21,8 @@ class game
     }
 
     /*
-    The hand is played by retrieving the user's selection 
-    and generating the computer's selection
+    The hand is played by retrieving the user's gesture
+    and generating the computer's gesture
     */
     public function playHand(){
 
@@ -75,7 +75,7 @@ class game
         //echo "<p>Player 1 gesture: ".$p1g."</p>\n";
         //echo "<p>Player 2 gesture: ".$p2g."</p>\n";
 
-        //Primary scoring algorythm
+        //Primary scoring algorithm
         $position=(5+($p1g-$p2g))%5;
 
         //==================
@@ -109,6 +109,8 @@ class game
         }
         
         //Get the offset position in the star matrix and populate the player actions and font icon.
+        //See the getActionOffset method for information about it's purpose
+
         $offset=$this->getActionOffset($p1g,$p2g);
         $this->player1->gestureAction=$this->getGesture($p1g, "action".$offset);
         $this->player1->gestureFA=$this->getGesture($p1g, "font_awesome");
@@ -116,6 +118,11 @@ class game
         $this->player2->gestureFA=$this->getGesture($p2g, "font_awesome");
 
     }
+
+    /*
+     * Get the Human Gesture from the AJAX url. Cast as integer.
+     * Dev Note: Time permitting this might be better done via the Request.
+     */
 
     public function getHumanGesture(){
 
@@ -126,14 +133,11 @@ class game
         }
     }
 
+    /*
+     * Generate the Computer gesture
+     */
     public function getComputerGesture(){
         return mt_rand(1, 5);
-    }
-
-    public function score($p1Gesture, $p2Gesture){
-
-        return (5+($p1Gesture-$p2Gesture))%5;
-
     }
 
     /*
