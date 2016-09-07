@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ gameInfo.name  }}{% endblock %}
+
+
+{% block stylesheets %}
+
+   <link rel="stylesheet" href="{{ asset('bundles/framework/css/game.css') }}" />
+   <link rel="stylesheet" href="{{ asset('bundles/framework/vendor/font-awesome-4.6.3/css/font-awesome.min.css') }}" />
+   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" media="all">
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="toggled" id="page-content-wrapper">
+        <main>
+            <section>
+                <div class="container">
+                    <div class="row">
+
+                        <div class="headerDiv col-lg-12">
+                            <h1>{{ gameInfo.name }}<br> ({{ gameInfo.code }})</h1>
+                            <!--{{ dump() }}-->
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row panel">
+                        <div class='panel col-lg-4 row'>
+                            {{ gameInfo.gameExplanation }}
+                            <br><br>
+                            <div id="stats">
+                            <p>
+
+                            <strong>User Stats:</strong><br>
+                                Wins: {{ stats.win }}<br>
+                                Losses: {{ stats.lose }}<br>
+                                Draws: {{ stats.draw }}<br>
+                                <br>
+                                <strong>User Gestures:</strong><br>
+                                {% for gestures in stats.user_gestures %}
+                                    {{ gestures.gesture_count }} {{ gestures.gesture }}<br>
+                                {% endfor %}
+                                <br>
+                                <strong>Computer Gestures:</strong><br>
+                                {% for gestures in stats.user_gestures %}
+                                    {{ gestures.gesture_count }} {{ gestures.gesture }}<br>
+                                {% endfor %}
+
+
+                            </p>
+                            </div>
+                        </div>
+                        <div class="playerPanel col-lg-8">
+
+                            <h2>{{ gameInfo.challengeMsg }}</h2>
+                            <!--{{ dump(gestures) }}-->
+
+                            {% for gesture in gestures|slice(0, gestures|length) %}
+                                <span id="{{ gesture.id }}" class="hand_gesture">
+                                    <i class="{{ gesture.fontAwesome }} " aria-hidden='true'></i>
+                                    {{ gesture.name }}
+                                </span>
+                            {% endfor %}
+
+                            <br><br>
+
+                            <div class='playerPanel col-lg-4'>
+                                <h2>Player 1 (You)</h2>
+                                <div id="p1Panel"></div>
+                                <br>
+                            </div>
+                            <div class='playerPanel col-lg-4'>
+                                <h2>Battle</h2>
+                                <div id="battlePanel"></div>
+                                <br>
+                            </div>
+                            <div class='playerPanel col-lg-4'>
+                                <h2>Player 2 (PC)</h2>
+                                <div id="p2Panel"></div>
+                                <br>
+                            </div>
+                            <br><br><br><br>
+                            <div class=' col-lg-12'>
+                                <br><p>
+                                Languages used: HTML, CSS, JavaScript/jQuery, Bootsrap, AJAX, JSON,<br> PHP (Symfony framework: Twig, Doctrine, DQL)
+                                <br>A Code Demo by Dan Guinn
+                                </p>
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
+
+                </div>
+            </section>
+        </main>
+    </div>
+
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="{{ asset('bundles/framework/js/app.js') }}"></script>
+{% endblock %}
+
