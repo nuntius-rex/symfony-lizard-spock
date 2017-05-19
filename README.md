@@ -10,6 +10,8 @@ git clone https://github.com/nuntius-rex/symfony-lizard-spock.git
 
 cd symfony-lizard-spock
 
+Note the lizard_spock.sql file. Setup a lizard_spock database and run the sql scripts in this file to create the tables in your database.
+
 chmod 777 var/cache/ var/logs/ -R
 
 Run the app:
