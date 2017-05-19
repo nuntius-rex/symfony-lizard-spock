@@ -1,4 +1,5 @@
-lizard-spock
-============
+# Rock Paper Scissors Lizard Spock Demo
 
-A Symfony project created on September 2, 2016, 12:39 am.
+A rock, paper, scissors, lizard, spock game demo written in PHP Symfony framework.
+
+![Preview](/web/preview.png?raw=true "Preview")
