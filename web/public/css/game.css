@@ -1,0 +1,25 @@
+.headerDiv{
+    border:solid 1px #000;
+    min-height:100px;
+}
+.panel{
+    padding-left:20px;
+    background-color: transparent;
+    border:solid 1px #000;
+}
+.playerPanel {
+    border:solid 1px #000;
+    min-height: 200px !important;
+    height:auto;
+    text-align: center;
+}
+.hand_gesture{
+    cursor: pointer;
+}
+
+.outcome{
+    color:darkred;
+}
+
+
+
