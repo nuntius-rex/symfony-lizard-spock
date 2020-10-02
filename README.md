@@ -2,7 +2,7 @@
 
 <p>A Rock-Paper-Scissors-Lizard-Spock game code demo written in PHP Symfony framework.</p>
 
-<p>This is an old code example I once did, back in 2017. If you would like to see a NodeJS version, 
+<p>This is an old code example I once did, back in 2017. If you would like to see a NodeJS version,<br> 
 visit this repo: https://github.com/nuntius-rex/Node-Lizard-Spock</p>
 
 ![Preview](/web/preview.png?raw=true "Preview")
